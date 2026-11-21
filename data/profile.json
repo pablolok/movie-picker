@@ -1,0 +1,27 @@
+{
+  "piattaforme": "Solo titoli inclusi negli abbonamenti Netflix Italia e Prime Video Italia. Niente noleggi o acquisti.",
+  "insieme": [
+    "Premesse forti e originali, film che coinvolgono presto",
+    "Narrazione leggibile, non incasinata",
+    "Se è una commedia deve far ridere davvero: il metro è Una notte da leoni (8)",
+    "Ryan Reynolds piace a entrambi",
+    "Burton e gotico-romantico funzionano (La sposa cadavere, Dark Shadows)",
+    "Fantasy d'avventura funziona (D&D L'onore dei ladri, Red One, Slumberland)"
+  ],
+  "ilaria": [
+    "Adora Bugonia e La trama fenicia (estetica, arte)",
+    "No found footage, camera a mano o finto documentario",
+    "I jump scare la fanno saltare",
+    "Perde interesse se il film non decolla"
+  ],
+  "pablo": [
+    "Ama musical come Moulin Rouge e Grease, ma non troppo cantati (Wicked)",
+    "Free Guy, Red Notice, Good Fortune",
+    "Nota la plausibilità delle scene"
+  ],
+  "evitare": [
+    "Trame semplici e convenzionali (\"niente di che\")",
+    "Slasher e serial killer come horror",
+    "Commedie che non fanno ridere (Friendship, Hit Man)"
+  ]
+}

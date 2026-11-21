@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movie Picker</title>
+  <meta name="theme-color" content="#14161c">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Movie Picker</h1>
+    <p class="muted">Pablo &amp; Ilaria</p>
+  </header>
+
+  <main>
+    <section id="stasera">
+      <h2>Cosa guardiamo stasera?</h2>
+      <div id="platforms" class="platforms"></div>
+      <div id="moods" class="chips"></div>
+      <div id="results" class="results">
+        <p class="muted">Scegli un'atmosfera: ti propongo solo film inclusi negli abbonamenti e che non avete già visto.</p>
+      </div>
+    </section>
+
+    <section id="storico" hidden>
+      <input id="search" type="search" placeholder="Cerca un film…" aria-label="Cerca un film">
+      <div id="pending" class="notice" hidden>
+        <span id="pending-count">0</span> film segnati da questo telefono.
+        <button id="export" class="ghost">Esporta films.json</button>
+      </div>
+      <div id="history"></div>
+    </section>
+
+    <section id="profilo" hidden></section>
+
+    <section id="impostazioni" hidden>
+      <h2>Impostazioni</h2>
+      <form id="settings-form" class="panel">
+        <label for="key">Chiave TMDB (API key v3 o token di lettura v4)</label>
+        <input id="key" type="password" autocomplete="off" placeholder="Incolla qui la chiave">
+        <button type="submit">Salva</button>
+        <p class="muted small">La chiave resta solo in questo browser. Si ottiene gratis su themoviedb.org, in Impostazioni &gt; API. I dati sulle piattaforme sono forniti da JustWatch tramite TMDB.</p>
+      </form>
+    </section>
+  </main>
+
+  <nav>
+    <button data-tab="stasera">Stasera</button>
+    <button data-tab="storico">Storico</button>
+    <button data-tab="profilo">Profilo</button>
+    <button data-tab="impostazioni">Impostazioni</button>
+  </nav>
+
+  <dialog id="rate">
+    <form method="dialog">
+      <h2></h2>
+      <div class="grid">
+        <label>Pablo <input name="pablo" inputmode="decimal" placeholder="es. 7,5"></label>
+        <label>Ilaria <input name="ilaria" inputmode="decimal" placeholder="es. 7"></label>
+      </div>
+      <label>Data <input name="data" type="date"></label>
+      <label>Commento <input name="commento" placeholder="es. molto bellino"></label>
+      <div class="actions">
+        <button type="submit">Salva</button>
+        <button type="button" class="ghost cancel">Annulla</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" hidden></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

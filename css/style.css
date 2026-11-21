@@ -1,0 +1,90 @@
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --text: #1c1d21;
+  --muted: #6b6d75;
+  --line: #e3e1dc;
+  --accent: #c2410c;
+  --accent-text: #ffffff;
+  --chip: #ecebe6;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161c;
+    --surface: #1d2028;
+    --text: #ececf0;
+    --muted: #9a9ca6;
+    --line: #2c303a;
+    --accent: #fb923c;
+    --accent-text: #1c1006;
+    --chip: #262a34;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 76px;
+}
+header, main { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+header { padding-top: 20px; }
+h1 { margin: 0; font-size: 1.6rem; }
+h2 { font-size: 1.15rem; margin: 20px 0 10px; }
+h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+button {
+  font: inherit; cursor: pointer; border: 0; border-radius: 10px;
+  padding: 9px 14px; background: var(--accent); color: var(--accent-text); font-weight: 600;
+}
+button.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); font-weight: 500; }
+input {
+  font: inherit; width: 100%; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+}
+label { display: block; margin: 8px 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 16px; }
+.chip { background: var(--chip); color: var(--text); font-weight: 500; border-radius: 999px; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+.platforms { display: flex; gap: 16px; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; margin: 0; }
+.toggle input { width: auto; }
+.results { display: grid; gap: 12px; }
+.card {
+  display: grid; grid-template-columns: 96px 1fr; gap: 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px;
+}
+.card img, .poster-empty { width: 96px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 8px; background: var(--chip); }
+.card-body { min-width: 0; }
+.meta { margin: 0 0 6px; color: var(--muted); font-size: 0.9rem; }
+.plot { margin: 0 0 10px; font-size: 0.92rem; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.notice { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 4px 16px 12px; margin-bottom: 12px; }
+.panel ul { padding-left: 18px; margin: 0; }
+.list { list-style: none; padding: 0; margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.list li { padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.list li:last-child { border-bottom: 0; }
+.row { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.score { margin-left: auto; font-weight: 600; white-space: nowrap; }
+#search { margin-top: 16px; }
+nav {
+  position: fixed; bottom: 0; left: 0; right: 0; display: flex; justify-content: center; gap: 4px;
+  background: var(--surface); border-top: 1px solid var(--line); padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+}
+nav button { background: transparent; color: var(--muted); font-weight: 500; padding: 8px 10px; }
+nav button[aria-current="true"] { color: var(--accent); font-weight: 700; }
+dialog {
+  border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--text);
+  width: min(420px, calc(100vw - 32px)); padding: 16px;
+}
+dialog::backdrop { background: rgb(0 0 0 / 0.45); }
+dialog h2 { margin-top: 0; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#toast {
+  position: fixed; bottom: 84px; left: 50%; transform: translateX(-50%);
+  background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 10px;
+}
+#pending { margin-top: 12px; }
