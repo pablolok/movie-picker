@@ -345,8 +345,52 @@ function initSettings() {
   });
 }
 
+// Desktop browsers: let the mouse drag (and the wheel) scroll horizontal rows.
+function dragScroll(box) {
+  let startX = 0;
+  let startLeft = 0;
+  let dragging = false;
+  let moved = false;
+  box.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    dragging = true;
+    moved = false;
+    startX = e.clientX;
+    startLeft = box.scrollLeft;
+  });
+  window.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) {
+      moved = true;
+      box.classList.add('dragging');
+    }
+    if (moved) box.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('pointerup', () => {
+    dragging = false;
+    box.classList.remove('dragging');
+  });
+  // A drag should not also count as a click on the item under the pointer.
+  box.addEventListener('click', (e) => {
+    if (moved) {
+      e.stopPropagation();
+      e.preventDefault();
+      moved = false;
+    }
+  }, true);
+  box.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && box.scrollWidth > box.clientWidth) {
+      box.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, { passive: false });
+}
+
 async function init() {
   bulbs();
+  dragScroll($('#moods'));
+  dragScroll($('#filters'));
   document.querySelectorAll('nav button').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab)));
   $('#search').addEventListener('input', renderHistory);
   $('#export').addEventListener('click', exportJson);
