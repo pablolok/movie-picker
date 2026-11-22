@@ -147,6 +147,9 @@ label input { margin-top: 6px; }
   scrollbar-width: none;
 }
 .moods::-webkit-scrollbar { display: none; }
+.moods, .filters { cursor: grab; }
+.moods.dragging, .filters.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.moods.dragging .mood { pointer-events: none; }
 .mood {
   flex: 0 0 108px;
   height: 78px;
