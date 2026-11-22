@@ -2,67 +2,103 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Movie Picker</title>
-  <meta name="theme-color" content="#14161c">
+  <meta name="theme-color" content="#0b0b0b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Cpath d='M22 18l24 14-24 14z' fill='%23e3242b'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header>
-    <h1>Movie Picker</h1>
-    <p class="muted">Pablo &amp; Ilaria</p>
+    <div class="marquee">
+      <div class="bulbs" aria-hidden="true"></div>
+      <div class="board">
+        <h1 class="page-title" id="page-title">Stasera in sala</h1>
+        <p class="page-sub" id="page-sub">Pablo &amp; Ilaria</p>
+      </div>
+      <div class="bulbs" aria-hidden="true"></div>
+    </div>
   </header>
 
   <main>
     <section id="stasera">
-      <h2>Cosa guardiamo stasera?</h2>
-      <div id="platforms" class="platforms"></div>
-      <div id="moods" class="chips"></div>
+      <div id="platforms" class="platforms" role="group" aria-label="Piattaforme"></div>
+      <div class="filmstrip">
+        <div class="sprockets" aria-hidden="true"></div>
+        <div id="moods" class="moods" role="group" aria-label="Atmosfera"></div>
+        <div class="sprockets" aria-hidden="true"></div>
+      </div>
       <div id="results" class="results">
-        <p class="muted">Scegli un'atmosfera: ti propongo solo film inclusi negli abbonamenti e che non avete già visto.</p>
+        <p class="intro">Scegli un'atmosfera sulla pellicola: ti propongo solo film inclusi negli abbonamenti e che non avete ancora visto.</p>
       </div>
     </section>
 
     <section id="storico" hidden>
-      <input id="search" type="search" placeholder="Cerca un film…" aria-label="Cerca un film">
+      <div id="stats" class="stats"></div>
+      <div id="filters" class="filters" role="group" aria-label="Filtro"></div>
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Cerca un film…" aria-label="Cerca un film">
+      </div>
       <div id="pending" class="notice" hidden>
-        <span id="pending-count">0</span> film segnati da questo telefono.
+        <span id="pending-text"></span>
         <button id="export" class="ghost">Esporta films.json</button>
       </div>
-      <div id="history"></div>
+      <div id="history" class="stubs"></div>
     </section>
 
     <section id="profilo" hidden></section>
 
     <section id="impostazioni" hidden>
-      <h2>Impostazioni</h2>
-      <form id="settings-form" class="panel">
-        <label for="key">Chiave TMDB (API key v3 o token di lettura v4)</label>
+      <form id="settings-form" class="panel lead">
+        <h2>Chiave TMDB</h2>
+        <label for="key">API key v3 o token di lettura v4</label>
         <input id="key" type="password" autocomplete="off" placeholder="Incolla qui la chiave">
-        <button type="submit">Salva</button>
+        <p><button type="submit">Salva</button></p>
         <p class="muted small">La chiave resta solo in questo browser. Si ottiene gratis su themoviedb.org, in Impostazioni &gt; API. I dati sulle piattaforme sono forniti da JustWatch tramite TMDB.</p>
       </form>
     </section>
   </main>
 
-  <nav>
-    <button data-tab="stasera">Stasera</button>
-    <button data-tab="storico">Storico</button>
-    <button data-tab="profilo">Profilo</button>
-    <button data-tab="impostazioni">Impostazioni</button>
+  <nav aria-label="Sezioni">
+    <button data-tab="stasera">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6z"/><path d="M14 5v14" stroke-dasharray="2 2"/></svg>
+      Stasera
+    </button>
+    <button data-tab="storico">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg>
+      Storico
+    </button>
+    <button data-tab="profilo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg>
+      Gusti
+    </button>
+    <button data-tab="impostazioni">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+      Impostazioni
+    </button>
   </nav>
 
   <dialog id="rate">
-    <form method="dialog">
+    <form method="dialog" class="stamp-card">
+      <p class="eyebrow">Fine del film</p>
       <h2></h2>
-      <div class="grid">
-        <label>Pablo <input name="pablo" inputmode="decimal" placeholder="es. 7,5"></label>
-        <label>Ilaria <input name="ilaria" inputmode="decimal" placeholder="es. 7"></label>
-      </div>
-      <label>Data <input name="data" type="date"></label>
-      <label>Commento <input name="commento" placeholder="es. molto bellino"></label>
+      <div class="stamp" aria-hidden="true">Visto<small id="stamp-date"></small></div>
+      <hr>
+      <div class="who p">Pablo</div>
+      <div class="scale p" role="group" aria-label="Voto di Pablo" data-who="pablo"></div>
+      <div class="who i">Ilaria</div>
+      <div class="scale i" role="group" aria-label="Voto di Ilaria" data-who="ilaria"></div>
+      <p class="half">Tocca di nuovo lo stesso numero per il mezzo voto.</p>
+      <label class="field">Una parola sul film <input name="commento" placeholder="es. molto bellino"></label>
+      <label class="field">Data <input name="data" type="date"></label>
       <div class="actions">
-        <button type="submit">Salva</button>
+        <button type="submit">Timbra</button>
         <button type="button" class="ghost cancel">Annulla</button>
       </div>
     </form>
